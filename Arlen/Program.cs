@@ -1,4 +1,4 @@
-﻿using Arlen;
+﻿using Arlen.Extensions;
 using Arlen.Game;
 using Arlen.Network;
 using Arlen.Services;

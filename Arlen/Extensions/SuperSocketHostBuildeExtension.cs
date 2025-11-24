@@ -5,9 +5,9 @@ using SuperSocket.Server.Abstractions.Host;
 using SuperSocket.WebSocket;
 using SuperSocket.WebSocket.Server;
 
-namespace Arlen;
+namespace Arlen.Extensions;
 
-public static class Extensions
+public static class SuperSocketHostBuildeExtension
 {
     public static ISuperSocketHostBuilder<WebSocketPackage> UseGameProtocol(this ISuperSocketHostBuilder<WebSocketPackage> builder)
     {

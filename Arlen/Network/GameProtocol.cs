@@ -1,4 +1,6 @@
-﻿using SuperSocket.WebSocket;
+﻿using Arlen.Network.Events;
+using SuperSocket.WebSocket; 
+using Arlen.Extensions;
 
 namespace Arlen.Network;
 
@@ -6,18 +8,17 @@ public class GameProtocol
 {
     public async ValueTask HandlerAsync(GameSession session, WebSocketPackage package)
     {
-        var response = new Message();
+        ParsePacket(session, package);
+    }
 
-        response.Opcode = Opcode.SPAWN_CHARACTER_EVENT;
-        //response.SerializePayload(new CharacterSpawnedEvent
-        //{
-        //    Id = 1,
-        //    Name = "Hero",
-        //    X = 4,
-        //    Y = 3
-        //});
+    private void ParsePacket(GameSession session, WebSocketPackage package)
+    {
+        var command = new ParsedCommand(package.Message);
 
-        await session.SendAsync(response.ToJson());
+        switch(command.Opcode)
+        {
+
+        }
     }
 
     public ValueTask OnSessionClosed(GameSession session, object? args)
