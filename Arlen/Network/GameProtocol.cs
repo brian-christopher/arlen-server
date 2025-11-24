@@ -9,13 +9,13 @@ public class GameProtocol
         var response = new Message();
 
         response.Opcode = Opcode.SPAWN_CHARACTER_EVENT;
-        response.SerializePayload(new CharacterSpawnedEvent
-        {
-            Id = 1,
-            Name = "Hero",
-            X = 4,
-            Y = 3
-        });
+        //response.SerializePayload(new CharacterSpawnedEvent
+        //{
+        //    Id = 1,
+        //    Name = "Hero",
+        //    X = 4,
+        //    Y = 3
+        //});
 
         await session.SendAsync(response.ToJson());
     }

@@ -15,16 +15,16 @@ public class Message
 
     public void SerializePayload<T>(T data) where T : class
     {
-        Payload = JsonSerializer.Serialize(data, SerializerOptions);
+        Payload = JsonSerializer.Serialize(data);
     }
 
     public T DeserializePayload<T>() where T : class
     {
-        return JsonSerializer.Deserialize<T>(Payload!, SerializerOptions)!;
+        return JsonSerializer.Deserialize<T>(Payload!)!;
     }
 
     public string ToJson()
     {
-        return JsonSerializer.Serialize(this);
+        return JsonSerializer.Serialize(this, SerializerOptions);
     }
 }
