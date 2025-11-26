@@ -1,4 +1,4 @@
-﻿namespace Arlen.Network.Events;
+﻿namespace Arlen.Network.Messages.Events;
 
 public record CharacterSpawnedEvent(int Id, string Name, int X, int Y)
     : INetworkMessage
