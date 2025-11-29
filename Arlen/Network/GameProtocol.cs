@@ -1,22 +1,24 @@
-﻿using SuperSocket.WebSocket;  
+﻿using Arlen.Extensions;
+using Arlen.Game;
+using Arlen.Network.Messages.Events;
+using SuperSocket.WebSocket;
 
 namespace Arlen.Network;
 
 public class GameProtocol
 {
-    public ValueTask HandlerAsync(GameSession session, WebSocketPackage package)
+    public async ValueTask HandlerAsync(GameSession session, WebSocketPackage package)
     {
-        ParsePacket(session, package);
-        return ValueTask.CompletedTask;
+        await ParsePacketAsync(session, package);
     }
 
-    private void ParsePacket(GameSession session, WebSocketPackage package)
-    { 
+    private async Task ParsePacketAsync(GameSession session, WebSocketPackage package)
+    {
+        await session.SendAsync(new CharacterSpawnedEvent(1, "brian", 30, 30));
     }
 
     public ValueTask OnSessionClosed(GameSession session, object? args)
     {
-        // Handle session opened logic here
         return ValueTask.CompletedTask;
     }
 
