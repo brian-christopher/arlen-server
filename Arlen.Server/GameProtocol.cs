@@ -1,3 +1,4 @@
+using Arlen.Network;
 using Arlen.Server.Game;
 using Arlen.Server.Services;
 using SuperSocket.Connection;
@@ -18,6 +19,13 @@ public sealed class GameProtocol
     
     public ValueTask HandlerAsync(GameSession session, WebSocketPackage package)
     {
+        var message = new Message(package.Message);
+
+        switch (message.Opcode)
+        {
+            
+        }
+        
         return ValueTask.CompletedTask;
     }
     
