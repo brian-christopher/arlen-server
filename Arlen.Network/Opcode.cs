@@ -2,5 +2,10 @@ namespace Arlen.Network;
 
 public enum Opcode
 {
-    None
+    //Commands 
+    CreateCharacter = 1,
+
+    //Events
+    ChangeMap = 100,
+    SpawnCharacter,
 }

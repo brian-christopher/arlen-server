@@ -1,13 +1,20 @@
+using Arlen.Network;
 using Microsoft.Extensions.DependencyInjection;
 using SuperSocket.Server;
 using SuperSocket.Server.Abstractions.Host;
 using SuperSocket.WebSocket;
 using SuperSocket.WebSocket.Server;
+using System.Text.Json;
 
 namespace Arlen.Server.Extensions;
 
 public static class WebSocketHostBuilderExtension
 {
+    private static readonly JsonSerializerOptions Options = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
+    };
+
     public static ISuperSocketHostBuilder<WebSocketPackage> UseGameProtocol(
         this ISuperSocketHostBuilder<WebSocketPackage> builder)
     {
@@ -30,5 +37,15 @@ public static class WebSocketHostBuilderExtension
                 return async (session, package) => await sp.GetRequiredService<GameProtocol>().HandlerAsync((GameSession)session, package);
             });
         });
+    }
+
+    public static async ValueTask SendAsync<T>(this GameSession session, T package)
+        where T : IPackage
+    {
+        ArgumentNullException.ThrowIfNull(session);
+        ArgumentNullException.ThrowIfNull(package);
+
+        var message = JsonSerializer.Serialize(package, Options)!;
+        await session.SendAsync(message);
     }
 }

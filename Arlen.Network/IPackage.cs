@@ -2,5 +2,5 @@
 
 public interface IPackage
 {
-    Opcode Opcode { get; set; }
+    Opcode Opcode { get;}
 }
