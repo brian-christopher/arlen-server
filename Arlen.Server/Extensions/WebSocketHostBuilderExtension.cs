@@ -10,11 +10,6 @@ namespace Arlen.Server.Extensions;
 
 public static class WebSocketHostBuilderExtension
 {
-    private static readonly JsonSerializerOptions Options = new()
-    {
-        PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
-    };
-
     public static ISuperSocketHostBuilder<WebSocketPackage> UseGameProtocol(
         this ISuperSocketHostBuilder<WebSocketPackage> builder)
     {
@@ -45,7 +40,7 @@ public static class WebSocketHostBuilderExtension
         ArgumentNullException.ThrowIfNull(session);
         ArgumentNullException.ThrowIfNull(package);
 
-        var message = JsonSerializer.Serialize(package, Options)!;
+        var message = JsonSerializer.Serialize(package)!;
         await session.SendAsync(message);
     }
 }
